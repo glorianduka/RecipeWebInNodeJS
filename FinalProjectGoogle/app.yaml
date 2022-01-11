@@ -1,0 +1,62 @@
+runtime: php74
+
+runtime_config:
+  document_root: FinalProjectGoogle
+
+handlers:
+- url: /(.+\.(gif|png|jpg|css|js|map|PNG))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg|css|js|map|PNG)$
+
+- url: /images
+  static_dir: images
+
+- url: /source/stylesheet
+  static_dir: stylesheet
+
+# - url: /fonts/Roboto/(.*\.ttf)
+#   static_files: /fonts/Roboto/\1
+#   upload: /fonts/Roboto/(.*\.ttf)
+#   mime_type: application/x-font-ttf
+
+# - url: /fonts/Original_Surfer/(.*\.ttf)
+#   static_files: /fonts/Original_Surfer/\1
+#   upload: /fonts/Original_Surfer/(.*\.ttf)
+#   mime_type: application/x-font-ttf
+
+# - url: /(.*\.ttf)
+#   mime_type: application/x-font-ttf
+#   static_files: static/\1
+#   upload: static/(.*\.ttf)
+
+- url: /(.*\.ttf)
+  static_files: fonts/\1
+  upload: fonts/(.*\.ttf)
+  mime_type: application/x-font-ttf
+
+
+# - url: /?authuser=0
+#   static_files: dist/index.php
+#   upload: dist/index.php
+
+# - url: /(.*)
+#   static_files: dist/index.php
+#   upload: dist/index.php
+
+# - url: .*
+#   script: index.php
+
+- url: /.*
+  script: auto
+
+
+
+entrypoint:
+  serve source/handler.php
+
+
+env_variables:
+  CLOUDSQL_USER: nduka_recipe_user
+  CLOUDSQL_DB: recipe
+  CLOUDSQL_PASSWORD: uscItp2021
+  CLOUDSQL_DSN: /cloudsql/centered-flow-332318:us-central1:recipe-db-new
